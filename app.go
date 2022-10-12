@@ -30,7 +30,7 @@ func (a App) Run(v turbine.Turbine) error {
 	// Replace `source_name` with the resource name the
 	// data store was configured with on Meroxa.
 
-	source, err := v.Resources("source_name")
+	source, err := v.Resources("mongodb-resource")
 	if err != nil {
 		return err
 	}
@@ -44,7 +44,7 @@ func (a App) Run(v turbine.Turbine) error {
 	//
 	// source.Records("collection_name", turbine.ResourceConfigs{turbine.ResourceConfig{Field: "incrementing.field.name", Value:"id"}})
 
-	rr, err := source.Records("collection_name", nil)
+	rr, err := source.Records("users", nil)
 	if err != nil {
 		return err
 	}
@@ -60,7 +60,7 @@ func (a App) Run(v turbine.Turbine) error {
 	// Replace `destination_name` with the resource name the
 	// data store was configured with on Meroxa.
 
-	dest, err := v.Resources("destination_name")
+	dest, err := v.Resources("mongodb-resource")
 	if err != nil {
 		return err
 	}
@@ -77,7 +77,7 @@ func (a App) Run(v turbine.Turbine) error {
 	//  turbine.ResourceConfigs{turbine.ResourceConfig{Field: "buffer.flush.time", Value: "10"}}
 	// )
 
-	err = dest.Write(res, "collection_archive")
+	err = dest.Write(res, "users_archive")
 	if err != nil {
 		return err
 	}
