@@ -1,9 +1,6 @@
 package main
 
 import (
-	// Dependencies of the example data app
-	"crypto/md5"
-	"encoding/hex"
 	"log"
 
 	// Dependencies of Turbine
@@ -93,7 +90,7 @@ func (f Anonymize) Process(stream []turbine.Record) []turbine.Record {
 	for i, record := range stream {
 		log.Printf("processing record: %+v\n", record)
 
-		err := record.Payload.Set("processed_by", "my turbine app")
+		err := record.Payload.Set("after.processed_by", "processed by a turbine app")
 		if err != nil {
 			log.Println("error setting value: ", err)
 			continue
@@ -101,9 +98,4 @@ func (f Anonymize) Process(stream []turbine.Record) []turbine.Record {
 		stream[i] = record
 	}
 	return stream
-}
-
-func consistentHash(s string) string {
-	h := md5.Sum([]byte(s))
-	return hex.EncodeToString(h[:])
 }
