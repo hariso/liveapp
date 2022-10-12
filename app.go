@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 
 	// Dependencies of Turbine
@@ -88,8 +89,13 @@ type Anonymize struct{}
 
 func (f Anonymize) Process(stream []turbine.Record) []turbine.Record {
 	for _, record := range stream {
-		after := record.Payload.Get("after")
-		log.Printf("got after, with type %T, value: %+v\n", after)
+		afterS := record.Payload.Get("after").(string)
+		var after map[string]interface{}
+		err := json.Unmarshal([]byte(afterS), after)
+		if err != nil {
+			log.Printf("got error %v", err)
+		}
+		log.Printf("got after value: %+v\n", after)
 	}
 	return stream
 }
