@@ -30,7 +30,7 @@ func (a App) Run(v turbine.Turbine) error {
 	// Replace `source_name` with the resource name the
 	// data store was configured with on Meroxa.
 
-	source, err := v.Resources("mongodb-resource")
+	source, err := v.Resources("mongodb-resource-two")
 	if err != nil {
 		return err
 	}
@@ -46,12 +46,7 @@ func (a App) Run(v turbine.Turbine) error {
 
 	rr, err := source.Records(
 		"users",
-		turbine.ResourceConfigs{
-			turbine.ResourceConfig{
-				Field: "database",
-				Value: "haris-test-db",
-			},
-		},
+		nil
 	)
 	if err != nil {
 		return err
@@ -68,7 +63,7 @@ func (a App) Run(v turbine.Turbine) error {
 	// Replace `destination_name` with the resource name the
 	// data store was configured with on Meroxa.
 
-	dest, err := v.Resources("mongodb-resource")
+	dest, err := v.Resources("mongodb-resource-two")
 	if err != nil {
 		return err
 	}
