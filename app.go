@@ -91,7 +91,7 @@ func (f Anonymize) Process(stream []turbine.Record) []turbine.Record {
 	for _, record := range stream {
 		afterS := record.Payload.Get("after").(string)
 		var after map[string]interface{}
-		err := json.Unmarshal([]byte(afterS), after)
+		err := json.Unmarshal([]byte(afterS), &after)
 		if err != nil {
 			log.Printf("got error %v", err)
 		}
