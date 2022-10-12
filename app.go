@@ -88,14 +88,23 @@ func (a App) Run(v turbine.Turbine) error {
 type Anonymize struct{}
 
 func (f Anonymize) Process(stream []turbine.Record) []turbine.Record {
-	for _, record := range stream {
+	for i, record := range stream {
 		afterS := record.Payload.Get("after").(string)
 		var after map[string]interface{}
 		err := json.Unmarshal([]byte(afterS), &after)
 		if err != nil {
-			log.Printf("got error %v", err)
+			log.Printf("got unmarshal error %v", err)
 		}
 		log.Printf("got after value: %+v\n", after)
+
+		after["processed_by"] = "haris-turbine-app"
+
+		bytes, err := json.Marshal(after)
+		if err != nil {
+			log.Printf("got marshal error %v", err)
+		}
+		record.Payload = bytes
+		stream[i] = record
 	}
 	return stream
 }
