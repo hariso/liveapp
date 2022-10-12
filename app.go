@@ -87,15 +87,9 @@ func (a App) Run(v turbine.Turbine) error {
 type Anonymize struct{}
 
 func (f Anonymize) Process(stream []turbine.Record) []turbine.Record {
-	for i, record := range stream {
-		log.Printf("processing record: %+v\n", record)
-
-		err := record.Payload.Set("after.processed_by", "processed by a turbine app")
-		if err != nil {
-			log.Println("error setting value: ", err)
-			continue
-		}
-		stream[i] = record
+	for _, record := range stream {
+		after := record.Payload.Get("after")
+		log.Printf("got after: %+v\n", after)
 	}
 	return stream
 }
