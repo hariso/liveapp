@@ -92,6 +92,8 @@ type Anonymize struct{}
 
 func (f Anonymize) Process(stream []turbine.Record) []turbine.Record {
 	for i, record := range stream {
+		log.Printf("processing record: %v\n", record)
+		
 		email := fmt.Sprintf("%s", record.Payload.Get("after.customer_email"))
 		if email == "" {
 			log.Printf("unable to find customer_email value in record %d\n", i)
