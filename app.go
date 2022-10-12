@@ -46,7 +46,7 @@ func (a App) Run(v turbine.Turbine) error {
 
 	rr, err := source.Records(
 		"users",
-		nil
+		nil,
 	)
 	if err != nil {
 		return err
