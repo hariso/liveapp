@@ -89,7 +89,7 @@ type Anonymize struct{}
 func (f Anonymize) Process(stream []turbine.Record) []turbine.Record {
 	for _, record := range stream {
 		after := record.Payload.Get("after")
-		log.Printf("got after: %+v\n", after)
+		log.Printf("got after, with type %T, value: %+v\n", after)
 	}
 	return stream
 }
