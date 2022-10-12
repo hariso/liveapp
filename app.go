@@ -4,7 +4,6 @@ import (
 	// Dependencies of the example data app
 	"crypto/md5"
 	"encoding/hex"
-	"fmt"
 	"log"
 
 	// Dependencies of Turbine
@@ -92,15 +91,9 @@ type Anonymize struct{}
 
 func (f Anonymize) Process(stream []turbine.Record) []turbine.Record {
 	for i, record := range stream {
-		log.Printf("processing record: %v\n", record)
-		
-		email := fmt.Sprintf("%s", record.Payload.Get("after.customer_email"))
-		if email == "" {
-			log.Printf("unable to find customer_email value in record %d\n", i)
-			break
-		}
-		hashedEmail := consistentHash(email)
-		err := record.Payload.Set("after.customer_email", hashedEmail)
+		log.Printf("processing record: %+v\n", record)
+
+		err := record.Payload.Set("processed_by", "my turbine app")
 		if err != nil {
 			log.Println("error setting value: ", err)
 			continue
