@@ -44,7 +44,15 @@ func (a App) Run(v turbine.Turbine) error {
 	//
 	// source.Records("collection_name", turbine.ResourceConfigs{turbine.ResourceConfig{Field: "incrementing.field.name", Value:"id"}})
 
-	rr, err := source.Records("users", nil)
+	rr, err := source.Records(
+		"users",
+		turbine.ResourceConfigs{
+			turbine.ResourceConfig{
+				Field: "database",
+				Value: "haris-test-db",
+			},
+		},
+	)
 	if err != nil {
 		return err
 	}
