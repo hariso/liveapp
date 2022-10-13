@@ -27,7 +27,7 @@ func (a App) Run(v turbine.Turbine) error {
 	// Replace `source_name` with the resource name the
 	// data store was configured with on Meroxa.
 
-	source, err := v.Resources("mongodb-resource-two")
+	source, err := v.Resources("mongodb-resource")
 	if err != nil {
 		return err
 	}
@@ -60,7 +60,7 @@ func (a App) Run(v turbine.Turbine) error {
 	// Replace `destination_name` with the resource name the
 	// data store was configured with on Meroxa.
 
-	dest, err := v.Resources("mongodb-resource-two")
+	dest, err := v.Resources("mongodb-resource")
 	if err != nil {
 		return err
 	}
@@ -88,6 +88,10 @@ func (a App) Run(v turbine.Turbine) error {
 type Anonymize struct{}
 
 func (f Anonymize) Process(stream []turbine.Record) []turbine.Record {
+	return stream
+}
+
+func (f Anonymize) ProcessOld(stream []turbine.Record) []turbine.Record {
 	for i, record := range stream {
 		afterS := record.Payload.Get("after").(string)
 		var after map[string]interface{}
