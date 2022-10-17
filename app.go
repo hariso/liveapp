@@ -77,7 +77,16 @@ func (a App) Run(v turbine.Turbine) error {
 	//  turbine.ResourceConfigs{turbine.ResourceConfig{Field: "buffer.flush.time", Value: "10"}}
 	// )
 
-	err = dest.WriteWithConfig(res, "users_archive", turbine.ResourceConfigs{})
+	err = dest.WriteWithConfig(
+		res,
+		"users_archive",
+		turbine.ResourceConfigs{
+			turbine.ConnectionOption{
+				Field: "field.renamer.mapping",
+				Value: `{ "oldName":"source", "newName":"debezium_source" }`,
+			},
+		},
+	)
 	if err != nil {
 		return err
 	}
