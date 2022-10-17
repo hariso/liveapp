@@ -82,8 +82,16 @@ func (a App) Run(v turbine.Turbine) error {
 		"users_archive",
 		turbine.ResourceConfigs{
 			turbine.ResourceConfig{
-				Field: "field.renamer.mapping",
-				Value: `[{ "oldName":"value.source", "newName":"debezium_source" }]`,
+				Field: "transforms",
+				Value: `RenameField`,
+			},
+			turbine.ResourceConfig{
+				Field: "transforms.RenameField.type",
+				Value: `org.apache.kafka.connect.transforms.ReplaceField$Value`,
+			},
+			turbine.ResourceConfig{
+				Field: "transforms.RenameField.renames",
+				Value: `source:debezium_source`,
 			},
 		},
 	)
