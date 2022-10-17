@@ -2,7 +2,7 @@ module github.com/hariso/liveapp
 
 go 1.19
 
-require github.com/meroxa/turbine-go v0.0.0-20221003150239-536f17d8e3ee
+require github.com/meroxa/turbine-go v0.0.0-20221014135642-acd9d28cfccc
 
 require (
 	github.com/caarlos0/env/v6 v6.10.1 // indirect

@@ -77,7 +77,7 @@ func (a App) Run(v turbine.Turbine) error {
 	//  turbine.ResourceConfigs{turbine.ResourceConfig{Field: "buffer.flush.time", Value: "10"}}
 	// )
 
-	err = dest.Write(res, "users_archive")
+	err = dest.WriteWithConfig(res, "users_archive", turbine.ResourceConfigs{})
 	if err != nil {
 		return err
 	}
