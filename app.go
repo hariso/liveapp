@@ -27,7 +27,7 @@ func (a App) Run(v turbine.Turbine) error {
 	// Replace `source_name` with the resource name the
 	// data store was configured with on Meroxa.
 
-	source, err := v.Resources("mongodb-resource")
+	source, err := v.Resources("mongodb-resource-two")
 	if err != nil {
 		return err
 	}
@@ -60,7 +60,7 @@ func (a App) Run(v turbine.Turbine) error {
 	// Replace `destination_name` with the resource name the
 	// data store was configured with on Meroxa.
 
-	dest, err := v.Resources("mongodb-resource")
+	dest, err := v.Resources("mongodb-resource-two")
 	if err != nil {
 		return err
 	}
