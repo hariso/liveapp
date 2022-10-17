@@ -80,10 +80,10 @@ func (a App) Run(v turbine.Turbine) error {
 	err = dest.WriteWithConfig(
 		res,
 		"users_archive",
-		turbine.ResourceConfigs{
+		turbine.ConnectionOptions{
 			turbine.ConnectionOption{
 				Field: "field.renamer.mapping",
-				Value: `{ "oldName":"source", "newName":"debezium_source" }`,
+				Value: `[{ "oldName":"source", "newName":"debezium_source" }]`,
 			},
 		},
 	)
