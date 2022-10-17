@@ -80,16 +80,16 @@ func (a App) Run(v turbine.Turbine) error {
 	err = dest.WriteWithConfig(
 		res,
 		"users_archive",
-		turbine.ResourceConfigs{
-			turbine.ResourceConfig{
+		turbine.ConnectionOptions{
+			turbine.ConnectionOption{
 				Field: "transforms",
 				Value: `RenameField`,
 			},
-			turbine.ResourceConfig{
+			turbine.ConnectionOption{
 				Field: "transforms.RenameField.type",
 				Value: `org.apache.kafka.connect.transforms.ReplaceField$Value`,
 			},
-			turbine.ResourceConfig{
+			turbine.ConnectionOption{
 				Field: "transforms.RenameField.renames",
 				Value: `source:debezium_source`,
 			},
