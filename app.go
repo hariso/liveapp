@@ -58,6 +58,11 @@ func (a App) Run(v turbine.Turbine) error {
 	// Replace `destination_name` with the resource name the
 	// data store was configured with on Meroxa.
 
+	res, err := v.Process(rr, Anonymize{})
+	if err != nil {
+		return err
+	}
+
 	dest, err := v.Resources("pg_db_again")
 	if err != nil {
 		return err
@@ -75,7 +80,7 @@ func (a App) Run(v turbine.Turbine) error {
 	//  turbine.ConnectionOptions{turbine.ResourceConfig{Field: "buffer.flush.time", Value: "10"}}
 	// )
 
-	err = dest.Write(rr, "products_enriched")
+	err = dest.Write(res, "products_enriched")
 	if err != nil {
 		return err
 	}
