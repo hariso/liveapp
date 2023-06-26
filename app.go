@@ -26,7 +26,7 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	rr, err := source.Records("products", nil)
+	rr, err := source.Records("movie_reviews", nil)
 	if err != nil {
 		return err
 	}
@@ -36,7 +36,7 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	err = dest.Write(rr, "products_enriched")
+	err = dest.Write(rr, "movie_reviews_destination")
 	if err != nil {
 		return err
 	}
