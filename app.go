@@ -58,7 +58,7 @@ func (a App) Run(v turbine.Turbine) error {
 	// Replace `destination_name` with the resource name the
 	// data store was configured with on Meroxa.
 
-	res, err := v.Process(rr, Anonymize{})
+	res, err := v.Process(rr, NoOp{})
 	if err != nil {
 		return err
 	}
