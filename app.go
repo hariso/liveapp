@@ -60,6 +60,7 @@ func (n NoOp) Process(stream []turbine.Record) []turbine.Record {
 type Anonymize struct{}
 
 func (f Anonymize) Process(stream []turbine.Record) []turbine.Record {
+	log.Println("inside Anonymize.Process()")
 	for i, record := range stream {
 		email := fmt.Sprintf("%s", record.Payload.Get("customer_email"))
 		if email == "" {
