@@ -92,6 +92,7 @@ type NoOp struct {
 }
 
 func (n NoOp) Process(stream []turbine.Record) []turbine.Record {
+	log.Println("NoOp Process called.")
 	return stream
 }
 
