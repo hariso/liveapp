@@ -88,6 +88,13 @@ func (a App) Run(v turbine.Turbine) error {
 	return nil
 }
 
+type NoOp struct {
+}
+
+func (n NoOp) Process(stream []turbine.Record) []turbine.Record {
+	return stream
+}
+
 type Anonymize struct{}
 
 func (f Anonymize) Process(stream []turbine.Record) []turbine.Record {
