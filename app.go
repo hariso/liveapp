@@ -36,7 +36,12 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	err = dest.Write(rr, "products_enriched")
+	res, err := v.Process(rr, Anonymize{})
+	if err != nil {
+		return err
+	}
+
+	err = dest.Write(res, "products_enriched")
 	if err != nil {
 		return err
 	}
