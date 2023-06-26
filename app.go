@@ -61,13 +61,13 @@ type Anonymize struct{}
 
 func (f Anonymize) Process(stream []turbine.Record) []turbine.Record {
 	for i, record := range stream {
-		email := fmt.Sprintf("%s", record.Payload.Get("after.customer_email"))
+		email := fmt.Sprintf("%s", record.Payload.Get("customer_email"))
 		if email == "" {
 			log.Printf("unable to find customer_email value in record %d\n", i)
 			break
 		}
 		hashedEmail := consistentHash(email)
-		err := record.Payload.Set("after.customer_email", hashedEmail)
+		err := record.Payload.Set("customer_email", hashedEmail)
 		if err != nil {
 			log.Println("error setting value: ", err)
 			continue
