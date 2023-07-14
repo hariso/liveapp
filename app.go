@@ -26,7 +26,16 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	rr, err := source.Records("products", nil)
+	rr, err := source.Records("products", []turbine.ConnectionOption{
+		{
+			Field: "url",
+			Value: "postgres://meroxa:d1254d9ac6bda4b33b590aa14a@diffuser-production-01h57f86mk04zpn8aqs16myx41.cg05juyjuelr.us-east-1.rds.amazonaws.com:5432/diffuser",
+		},
+		{
+			Field: "table",
+			Value: "products",
+		},
+	})
 	if err != nil {
 		return err
 	}
@@ -41,7 +50,20 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	err = dest.Write(res, "products_enriched")
+	err = dest.WriteWithConfig(
+		res,
+		"products_enriched",
+		[]turbine.ConnectionOption{
+			{
+				Field: "url",
+				Value: "postgres://meroxa:d1254d9ac6bda4b33b590aa14a@diffuser-production-01h57f86mk04zpn8aqs16myx41.cg05juyjuelr.us-east-1.rds.amazonaws.com:5432/diffuser",
+			},
+			{
+				Field: "table",
+				Value: "products_enriched",
+			},
+		},
+	)
 	if err != nil {
 		return err
 	}
