@@ -21,7 +21,7 @@ var _ turbine.App = (*App)(nil)
 type App struct{}
 
 func (a App) Run(v turbine.Turbine) error {
-	source, err := v.Resources("s3-haris")
+	source, err := v.Resources("s3-haris-again")
 	if err != nil {
 		return err
 	}
@@ -31,7 +31,7 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	dest, err := v.Resources("s3-haris")
+	dest, err := v.Resources("s3-haris-again")
 	if err != nil {
 		return err
 	}
